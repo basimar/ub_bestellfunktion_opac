@@ -1,0 +1,168 @@
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>UB Basel: Bestellung Dokumentensammlung</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="language" content="de" />
+<meta name="author" content="UB Basel" />
+<style>
+ input[disabled] {
+    opacity: 0.2;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/css/CgiCms.css" /> 
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/styles.css" media="all" /> 
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/print.css"  media="print" />
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/wwz-colors.css" media="all"/> 
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/cmsdata/templates/ganze-breite.css" media="all"/>
+
+
+<title>Universitätsbibliothek Basel. Bestellung Dokumentensammlung SWA</title>
+<script type="text/javascript">
+/*<![CDATA[*/
+function checkBES() {
+    var msg = "";
+
+    if(typeof String.prototype.trim !== 'function') {
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, ''); 
+        };
+    }
+
+    if ((( !document.BES.uid.value.trim().length ) || ( !document.BES.pwd.value.trim().length )) && (( !document.BES.name.value.trim().length ) || ( !document.BES.street.value.trim().length ) || ( !document.BES.city.value.trim().length ))) {
+        msg += "- Pers\u00f6nliche Angaben (Name, Adresse, E-Mail oder Benutzername und Passwort)\n";
+
+    }
+
+    if ((!document.BES.sig.value.trim().length) || (!document.BES.title.value.trim().length)) {
+        msg += "- Angaben zum gewünschten Dokument (Signatur und Titel)\n";
+    }
+
+    if ( msg.length > 0 ) {
+        errmsg = "Diese Felder sind obligatorisch:\n\n" + msg;
+        alert(errmsg);
+        return false;
+    }
+    else {
+        document.BES.address.value = document.BES.street.value + ', ' + document.BES.city.value + ', ' + document.BES.country.value;
+        document.BES.submit();
+    }
+}
+/*]]>*/
+</script>
+
+</head>
+
+<body>
+
+<img id="print-logo" src="http://www.ub.unibas.ch/fileadmin/templates/images/logo-print.gif" alt="" />
+<div id="mainnav">
+  <ul>
+    <li class="wwzbib"><a href="http://www.ub.unibas.ch/ub-wirtschaft-swa/schweiz-wirtschaftsarchiv/allgemeines/" target="_top">&#160;&#160;UB WIRTSCHAFT - SWA&#160;&#160;</a></li>
+  </ul>
+</div>
+<div id="ohneKatalog">
+<div id="content">
+<h1>Ihre Bestellung:</h1>
+<p>Mit diesem Formular k&ouml;nnen Sie Dokumente zur Ansicht in den Lesesaal der besitzenden Institution bestellen (keine Heimausleihe).</p>
+<p>Die Konsultation der gew&uuml;nschten Dokumente kann aus konservatorischen Gr&uuml;nden eingeschr&auml;nkt sein. Falls es Einschr&auml;nkungen gibt, erhalten Sie von uns eine Mitteilung.</p>
+<p><span class="rot">*</span> = Eingabe obligatorisch</p>
+
+<form method="post" name="BES" action="%%MYURL%%">
+<fieldset>
+<input type="hidden" name="action" value="submit" style="display:none"/>
+
+<label for="bes_uid" title="Ihre Benutzernummer im Bibliothekskatalog IDS Basel Bern">Benutzernummer<span class="rot">*</span></label> <input style="width:250px" type="text" name="uid" id="bes_uid" size="50"/><br/> 
+
+<label for="bes_pwd" title="Ihr Passwort im Bibliothekskatalog IDS Basel Bern">Passwort<span class="rot">*</span></label> <input style="width:250px" class="short" type="password" name="pwd" id="bes_pwd"/><br/> 
+
+<br/>
+Alternativ können Sie sich manuell anmelden: 
+<br/>
+<br/>
+
+<label for="bes_name" title="Ihr Name">Name, Vorname<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="name" id="bes_name" size="50"/><br/>
+
+<input type="hidden" name="address" value="" style="display:none"/>
+
+<label for="bes_street" title="Strasse">Strasse<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="street" id="bes_street" size="50"/><br/>
+
+<label for="bes_city" title="PLZ / Ort">PLZ / Ort<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="city" id="bes_city" size="50"/><br/>
+
+<label for="bes_country" title="Land">Land<span class="rot"></span></label>
+<input style="width:250px" type="text" name="country" id="bes_country" size="50"/><br/>
+
+<label for="bes_place" title="Ihr Telefon">Telefon</label>
+<input style="width:250px" type="text" name="phone" id="bes_phone" size="50"/><br/>
+
+<label for="bes_mail" title="Ihre E-Mail-Adresse">E-Mail-Adresse<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="email" id="bes_mail" size="50"/><br/>
+<br/>
+Angaben zur gew&uuml;nschten Dokumentensammlung:
+<br/>
+<br/>
+<label for="bes_sig" title="Signatur">Signatur<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="sig" id="bes_sig" size="50"/><br/>
+<label for="bes_title" title="Signatur">Titel<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="title" id="bes_title" size="50"/><br/>
+<br/>
+
+Bitte geben Sie die Teile der Dokumentensammlung an, die Sie interessieren<br/>
+<br/>
+<label for="bes_box3" style="border:none">&nbsp;</label>
+<input id="bes_box3" class="box" type="checkbox" value="Jahresberichte" name="report"/>Jahresberichte<br/>
+
+<label for="bes_box2" style="border:none">&nbsp;</label>
+<input id="bes_box2" class="box" type="checkbox" value="Brosch&uuml;ren" name="brochure"/>Brosch&uuml;ren<br/>
+
+<label for="bes_box1" style="border:none">&nbsp;</label>
+<input id="ill_box1" class="box" type="checkbox" value="Zeitungsausschnitte" name="newspaper"/>Zeitungsausschnitte<br/>
+
+<label for="bes_box4" style="border:none">&nbsp;</label>
+<input id="bes_box4" class="box" type="checkbox" value="yes" name="misc" onclick="if (this.checked){ document.getElementById('bes_misc_content').removeAttribute('disabled');} else if (!this.checked) { document.getElementById('bes_misc_content').setAttribute('disabled','disabled'); document.getElementById('bes_misc_content').value = '';}"/>Anderes (bitte angeben)<br/>
+
+<label for="bes_misc_content" style="border:none">&nbsp;</label>
+<input style="width:250px" type="text" name="misc_content" id="bes_misc_content" size="50" disabled /><br/>
+
+</br>
+
+<label for="bes_time" style="font-weight:normal">Gew&uuml;nschte Jahre/Jahrg&auml;nge</label>
+<input style="width:250px" type="text" name="time" id="bes_time" size="50"/><br/>
+
+<br/>
+Das Dokument wird im Lesesaal der folgenden Institution zur Verf&uuml;gung gestellt:
+<br/>
+<br/>
+<h3>%%MYLIBNAME%%
+<input style="width:40px;font-weight:bold" type="button" id="bes_butt1"
+value="Info" name="b1" onClick="window.open('%%MYLIBLINK%%','mywindow')" /><br/> </h3>
+</br>
+%%MYLIBNOTES%%
+</br>
+</br>
+</br>
+<label for="bes_visit">Ich bestelle die Unterlagen f&uuml;r folgendes Datum</label>
+<input style="width:250px" type="text" name="visit" id="bes_visit" size="50"/><br/>
+
+<label for="bes_bem">Bemerkungen, weitere Angaben</label>
+<textarea name="bem" id="bes_bem" cols="50" rows="2"></textarea><br/>
+
+<br/>
+
+
+<br/>
+<label for="bes_butt1" style="border:none">&nbsp;</label>
+<input style="width:100px;font-weight:bold" type="button" id="bes_butt1"
+value="weiter &nbsp; &gt;&gt;" name="b1" onClick="checkBES()" /><br/>
+
+</fieldset>
+</form>
+</div>
+</div>
+</body>
+</html>

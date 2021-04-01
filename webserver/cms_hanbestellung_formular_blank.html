@@ -1,0 +1,130 @@
+
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de" lang="de">
+<head>
+<title>Verbundkatalog HAN: Dokumentbestellung</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="language" content="de" />
+<meta name="author" content="UB Basel" />
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/css/CgiCmsHAN.css" />
+<!--<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/print.css"  media="print" />--> 
+<!--<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/wwz-colors.css" media="all"/> -->
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/cmsdata/templates/ganze-breite.css" media="all"/>
+<!--<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/styles.css" media="all"/>-->
+<link rel="stylesheet" type="text/css" href="http://www.ub.unibas.ch/fileadmin/templates/stylesheets/han-styles.css" media="all"/>
+
+<script type="text/javascript">
+/*<![CDATA[*/
+function checkBES() {
+    var msg = "";
+
+    if(typeof String.prototype.trim !== 'function') {
+        String.prototype.trim = function() {
+            return this.replace(/^\s+|\s+$/g, ''); 
+        };
+    }
+
+    if ((( !document.BES.uid.value.trim().length ) || ( !document.BES.pwd.value.trim().length )) && (( !document.BES.name.value.trim().length ) || ( !document.BES.street.value.trim().length ) || ( !document.BES.city.value.trim().length ) || ( !document.BES.email.value.trim().length ))) { 
+        msg += "- Pers\u00f6nliche Angaben (Name, Adresse, E-Mail oder Benutzername und Passwort)\n";
+    }
+    if ((!document.BES.sig.value.trim().length) || (!document.BES.title.value.trim().length)) {
+        msg += "- Angaben zum gewünschten Dokument (Signatur und Titel)\n";
+    }
+    if ( msg.length > 0 ) {
+        errmsg = "Diese Felder sind obligatorisch:\n\n" + msg;
+        alert(errmsg);
+        return false;
+    }
+    else {
+        document.BES.address.value = document.BES.street.value + ', ' + document.BES.city.value + ', ' + document.BES.country.value;
+        document.BES.submit();
+    }
+}
+/*]]>*/
+</script>
+</head>
+<body>
+<div id="mainnav">
+  <ul>
+    <li class="ub"><a href="http://www.ub.unibas.ch/han" target="_top">&#160;&#160;VERBUND HAN&#160;&#160;</a></li>
+  </ul>
+</div>
+<div id="ohneKatalog">
+<div id="content">
+<h1>Ihre Bestellung:</h1>
+<p>Mit diesem Formular k&ouml;nnen Sie Dokumente zur Ansicht in den Lesesaal der besitzenden Institution bestellen (keine Heimausleihe).</p>
+<p>Die Konsultation der gew&uuml;nschten Dokumente kann aus rechtlichen oder konservatorischen Gr&uuml;nden bzw. aufgrund von Vorgaben des Bestandseigent&uuml;mers (Deposita) eingeschr&auml;nkt sein. Falls es Einschr&auml;nkungen gibt, erhalten Sie von uns eine Mitteilung.</p>
+<br>
+<p><span class="rot">*</span> = Eingabe obligatorisch</p>
+
+<form method="post" name="BES" action="%%MYURL%%">
+<fieldset>
+<input type="hidden" name="address" value="" style="display:none"/>
+<input type="hidden" name="action" value="submit" style="display:none"/>
+
+<label for="bes_name" title="Ihr Name">Vorname Name<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="name" id="bes_name" size="50"/><br/>
+
+<input type="hidden" name="lng" value="%%MYLNG%%" style="display:none"/>
+<input type="hidden" name="lib" value="%%MYLIB%%" style="display:none"/>
+<input type="hidden" name="libname" value="%%MYLIBNAME%%" style="display:none"/>
+
+<label for="bes_street" title="Strasse">Strasse<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="street" id="bes_street" size="50"/><br/>
+
+<label for="bes_city" title="PLZ / Ort">PLZ / Ort<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="city" id="bes_city" size="50"/><br/>
+
+<label for="bes_country" title="Land">Land<span class="rot"></span></label>
+<input style="width:250px" type="text" name="country" id="bes_country" size="50"/><br/>
+
+<label for="bes_place" title="Ihr Telefon">Telefon</label>
+<input style="width:250px" type="text" name="phone" id="bes_phone" size="50"/><br/>
+
+<label for="bes_mail" title="Ihre E-Mail-Adresse">E-Mail-Adresse<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="email" id="bes_mail" size="50"/><br/>
+
+<br/>
+Alternativ k&ouml;nnen Sie Sich mit Ihrem IDS-Bibliothekskonto anmelden :
+<br/>
+<br/>
+
+<label for="bes_uid" title="Ihre Benutzernummer im Bibliothekskatalog IDS">Benutzernummer<span class="rot">*</span></label> <input style="width:250px" type="text" name="uid" id="bes_uid" size="50"/><br/> 
+
+<label for="bes_pwd" title="Ihr Passwort im Bibliothekskatalog IDS">Passwort<span class="rot">*</span></label> <input style="width:250px" class="short" type="password" name="pwd" id="bes_pwd"/><br/> 
+<br/>
+Angaben zum gew&uuml;nschten Dokument:
+<br/>
+<br/>
+<label for="bes_sig" title="Signatur">Signatur<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="sig" id="bes_sig" size="50"/><br/>
+<label for="bes_title" title="Signatur">Titel<span class="rot">*</span></label>
+<input style="width:250px" type="text" name="title" id="bes_title" size="50"/><br/>
+<br/>
+Sie bestellen Ihr Dokument in den Lesesaal der folgenden Institution:
+<br/>
+<h3>%%MYLIBNAME%% 
+<input style="width:40px;font-weight:bold" type="button" id="bes_butt1"
+value="Info" name="b1" onClick="window.open('%%MYLIBLINK%%','mywindow')" /><br/> </h3>
+</br>
+</br>
+<label for="bes_visit">Gew&uuml;nschtes Datum f&uuml;r Konsultation</label>
+<input style="width:250px" type="text" name="visit" id="bes_visit" size="50"/><br/>
+
+<label for="bes_bem">Bemerkungen, weitere Angaben</label>
+<textarea name="bem" id="bes_bem" cols="50" rows="2"></textarea><br/>
+
+
+<br/>
+<label for="bes_butt1" style="border:none">&nbsp;</label>
+<input style="width:100px;font-weight:bold" type="button" id="bes_butt1"
+value="weiter &nbsp; &gt;&gt;" name="b1" onClick="checkBES()" /><br/>
+
+</fieldset>
+</form>
+</div>
+</div>
+<body>
+</html>
